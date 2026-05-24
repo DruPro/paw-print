@@ -12,7 +12,7 @@ npx sv create my-app
 ```
 
 To recreate this project with the same configuration:
-
+<iframe title="Mini preview" width="300" height="200" class="svelte-108px9u" src="https://drupro.github.io/paw-print/viewmini"></iframe>
 ```sh
 # recreate this project
 deno run npm:sv@0.15.3 create --template minimal --no-types --install deno my-app
