@@ -1,0 +1,1 @@
+import{g as e,v as t}from"../chunks/HGhg2sAx.js";import"../chunks/xihTtKlq.js";import"../chunks/B8lKNlmx.js";var n=t(`<h1>Root Page</h1>`);function r(t){e(t,n())}export{r as component};
