@@ -41,6 +41,7 @@
 </section>
 
 <style>
+  /* Mobile-first Styles */
   .profile-hero {
     display: flex;
     flex-direction: column;
@@ -48,6 +49,8 @@
     padding: 2.25rem 1.5rem 1.25rem;
     text-align: center;
     gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   .avatar-ring {
@@ -118,5 +121,39 @@
     margin: 0.2rem 0 0;
     line-height: 1.65;
     max-width: 290px;
+  }
+
+  /* ── Laptop / Desktop Layout Enhancements ── */
+  @media (min-width: 768px) {
+    .profile-hero {
+      flex-direction: row; /* Align Avatar and Text side-by-side */
+      text-align: left;
+      align-items: flex-start;
+      gap: 2.5rem;
+      padding: 4rem 2rem 2.5rem;
+    }
+
+    .avatar-ring {
+      width: 160px; /* Slightly larger avatar for desktop */
+      height: 160px;
+    }
+
+    .profile-text {
+      align-items: flex-start;
+      padding-top: 1rem;
+    }
+
+    .profile-name {
+      font-size: 3rem; /* Larger name */
+    }
+
+    .profile-breed {
+      font-size: 0.85rem;
+    }
+
+    .profile-bio {
+      max-width: 550px; /* Wider bio path */
+      font-size: 1rem;
+    }
   }
 </style>
