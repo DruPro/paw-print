@@ -15,7 +15,7 @@ Paw-Print is a high-fidelity, mobile-first link-in-bio platform engineered speci
 ## System Architecture
 
 The following diagram illustrates the ingestion, retrieval, and mini-view distribution pipelines designed for scale, utilizing CDN caching, Redis for hot-spot handling, and non-SQL storage for template JSON data.
-
+<img src="https://github.com/DruPro/paw-print/blob/main/systems_diagram.png" alt="Systems Diagram">
 ## The Feature Pitch: Mini-View Embeddable Hubs
 
 ### What is the feature?
