@@ -1,5 +1,5 @@
 <script>
-  import logo from '$lib/assets/pawprint-logo.png'
+    import { asset } from '$app/paths';
 
   let { socials = [] } = $props()
 
@@ -54,7 +54,7 @@
   </div>
 
   <div class="footer-brand">
-    <img src={logo} alt="" class="footer-logo" aria-hidden="true" />
+    <img src={asset('/assets/pawprint-logo.png')} alt="" class="footer-logo" aria-hidden="true" />
     <div class="footer-brand-text">
       <span class="footer-name">PawPrint</span>
       <span class="footer-tagline">The Link in Bio Designed for Man's Best Friend</span>

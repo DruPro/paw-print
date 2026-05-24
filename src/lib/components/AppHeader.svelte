@@ -1,11 +1,11 @@
 <script>
-  import logo from "$lib/assets/pawprint-logo.png";
+  import {asset} from '$app/paths';
 </script>
 
 <header class="app-header">
   <div class="logo-wrap">
     <div class="logo-img-ring">
-      <img src={logo} alt="PawPrint logo" class="logo-img" />
+      <img src={asset('/assets/pawprint-logo.png')} alt="PawPrint logo" class="logo-img" />
     </div>
 
     <div class="logo-text-group">

@@ -1,12 +1,14 @@
 <script>
-  import logo from '$lib/assets/pawprint-logo.png'
+    import { asset } from "$app/paths";
+
+  
 </script>
 
 <section class="hero">
   <div class="hero-badge">🐾 The New Way to Introduce Your Dog</div>
 
   <div class="hero-logo-wrap">
-    <img src={logo} alt="PawPrint" class="hero-logo" />
+    <img src={asset('/assets/pawprint-logo.png')} alt="PawPrint" class="hero-logo" />
   </div>
 
   <h1 class="hero-headline">

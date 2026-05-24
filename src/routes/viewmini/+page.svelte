@@ -1,82 +1,106 @@
 <script lang="ts">
   // ── Data (same as DogProfilePreview) ────────────────────────────────────────
-    let exampleAvatar = '/assets/golden-retriever-tongue-out.jpg'
+  import { asset } from "$app/paths";
+
+  // SvelteKit automatically prepends the repo name during the build
+  let exampleAvatar = asset("/assets/golden-retriever-tongue-out.jpg");
+
   const dog = {
-    name: 'Biscuit McFloof',
-    breed: 'Golden Retriever · 3 yrs · Male',
-    bio: 'Professional Squirrel Chaser 🐿️ | Treat Connoisseur | Certified Zoomie Expert',
+    name: "Biscuit McFloof",
+    breed: "Golden Retriever · 3 yrs · Male",
+    bio: "Professional Squirrel Chaser 🐿️ | Treat Connoisseur | Certified Zoomie Expert",
     avatarUrl: exampleAvatar,
 
-    treats: ['Peanut Butter', 'Bacon Strips', 'Sweet Potato', 'Blueberries', 'Cheese'],
-    smells: ['Fresh Cut Grass', 'BBQ Smoke', 'Ocean Breeze', 'Pine Trees'],
+    treats: [
+      "Peanut Butter",
+      "Bacon Strips",
+      "Sweet Potato",
+      "Blueberries",
+      "Cheese",
+    ],
+    smells: ["Fresh Cut Grass", "BBQ Smoke", "Ocean Breeze", "Pine Trees"],
 
     favoritePlaces: [
-      { name: 'Riverside Dog Park', emoji: '🌳' },
-      { name: 'Main Street Café',   emoji: '☕' },
-      { name: 'Ocean Beach Trail',  emoji: '🏖️' },
-      { name: "Grandma's House",    emoji: '🏡' },
+      { name: "Riverside Dog Park", emoji: "🌳" },
+      { name: "Main Street Café", emoji: "☕" },
+      { name: "Ocean Beach Trail", emoji: "🏖️" },
+      { name: "Grandma's House", emoji: "🏡" },
     ],
 
-    dislikes: ['Thunderstorms', 'The Vacuum', 'Baths', 'Mailman', 'Sudden Loud Noises'],
+    dislikes: [
+      "Thunderstorms",
+      "The Vacuum",
+      "Baths",
+      "Mailman",
+      "Sudden Loud Noises",
+    ],
 
     friendlyWith: { dogs: true, cats: false, kids: true, strangers: true },
 
-    vitals: { weight: '68 lbs', energy: 4, trainedLevel: 3, barkLevel: 2 },
+    vitals: { weight: "68 lbs", energy: 4, trainedLevel: 3, barkLevel: 2 },
 
-    tags: ['Neutered', 'Vaccinated', 'Microchipped', 'Leash Trained'],
-  }
+    tags: ["Neutered", "Vaccinated", "Microchipped", "Leash Trained"],
+  };
 
   function stars(n: number, max = 5): string {
-    return Array.from({ length: max }, (_, i) => (i < n ? '●' : '○')).join(' ')
+    return Array.from({ length: max }, (_, i) => (i < n ? "●" : "○")).join(" ");
   }
 
   // ── Slides definition ───────────────────────────────────────────────────────
   const slides = [
-    { id: 'profile',  label: 'Profile'    },
-    { id: 'social',   label: 'Social'     },
-    { id: 'vitals',   label: 'Vitals'     },
-    { id: 'treats',   label: 'Favourites' },
-    { id: 'places',   label: 'Places'     },
-    { id: 'dislikes', label: 'Dislikes'   },
-  ]
+    { id: "profile", label: "Profile" },
+    { id: "social", label: "Social" },
+    { id: "vitals", label: "Vitals" },
+    { id: "treats", label: "Favourites" },
+    { id: "places", label: "Places" },
+    { id: "dislikes", label: "Dislikes" },
+  ];
 
-  const total = slides.length
+  const total = slides.length;
 
   // ── Svelte 5 runes ──────────────────────────────────────────────────────────
-  let current = $state(0)
+  let current = $state(0);
 
-  const canPrev = $derived(current > 0)
-  const canNext = $derived(current < total - 1)
+  const canPrev = $derived(current > 0);
+  const canNext = $derived(current < total - 1);
 
   function goTo(n: number) {
-    current = Math.max(0, Math.min(total - 1, n))
+    current = Math.max(0, Math.min(total - 1, n));
   }
-  function prev() { goTo(current - 1) }
-  function next() { goTo(current + 1) }
+  function prev() {
+    goTo(current - 1);
+  }
+  function next() {
+    goTo(current + 1);
+  }
 
   // ── Touch / swipe ───────────────────────────────────────────────────────────
-  let touchStartX = $state(0)
+  let touchStartX = $state(0);
 
   function onTouchStart(e: TouchEvent) {
-    touchStartX = e.touches[0].clientX
+    touchStartX = e.touches[0].clientX;
   }
   function onTouchEnd(e: TouchEvent) {
-    const dx = e.changedTouches[0].clientX - touchStartX
-    if (dx > 52)  prev()
-    else if (dx < -52) next()
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (dx > 52) prev();
+    else if (dx < -52) next();
   }
 
   // ── Keyboard ────────────────────────────────────────────────────────────────
   function onKeydown(e: KeyboardEvent) {
-    if (e.key === 'ArrowLeft')  prev()
-    if (e.key === 'ArrowRight') next()
+    if (e.key === "ArrowLeft") prev();
+    if (e.key === "ArrowRight") next();
   }
 </script>
 
 <svelte:window onkeydown={onKeydown} />
 
 <!-- ─────────────────────────────────────────────────────────────────────────── -->
-<section class="mini-section" id="preview-mini" aria-label="Dog profile card carousel">
+<section
+  class="mini-section"
+  id="preview-mini"
+  aria-label="Dog profile card carousel"
+>
   <!-- Carousel wrapper -->
   <div
     class="carousel-root"
@@ -87,8 +111,10 @@
   >
     <!-- ── Slide track ─────────────────────────────────────────────────────── -->
     <!-- Dynamically offsets by the (width + gap) of each previous slide -->
-    <div class="slide-track" style="transform: translateX(calc(-{current * 100}% - {current} * 1rem))">
-
+    <div
+      class="slide-track"
+      style="transform: translateX(calc(-{current * 100}% - {current} * 1rem))"
+    >
       <!-- ── SLIDE 0 · Profile ─────────────────────────────────────────────── -->
       <article class="slide" aria-label="Profile">
         <div class="card profile-card">
@@ -118,16 +144,11 @@
           <div class="slide-eyebrow">🐕 Friendly With</div>
           <h3 class="slide-title">Who Does Biscuit Get Along With?</h3>
           <div class="friendly-grid">
-            {#each [
-              { icon: '🐕', label: 'Dogs',      val: dog.friendlyWith.dogs      },
-              { icon: '🐈', label: 'Cats',      val: dog.friendlyWith.cats      },
-              { icon: '👧', label: 'Kids',      val: dog.friendlyWith.kids      },
-              { icon: '🧑', label: 'Strangers', val: dog.friendlyWith.strangers },
-            ] as item}
+            {#each [{ icon: "🐕", label: "Dogs", val: dog.friendlyWith.dogs }, { icon: "🐈", label: "Cats", val: dog.friendlyWith.cats }, { icon: "👧", label: "Kids", val: dog.friendlyWith.kids }, { icon: "🧑", label: "Strangers", val: dog.friendlyWith.strangers }] as item}
               <div class="friendly-item {item.val ? 'yes' : 'no'}">
                 <span class="fi-icon">{item.icon}</span>
                 <span class="fi-label">{item.label}</span>
-                <span class="fi-status">{item.val ? '✓' : '✗'}</span>
+                <span class="fi-status">{item.val ? "✓" : "✗"}</span>
               </div>
             {/each}
           </div>
@@ -203,7 +224,10 @@
         <div class="card">
           <div class="slide-eyebrow">🚫 Watch Out</div>
           <h3 class="slide-title">Does NOT Like</h3>
-          <p class="slide-body-sub">Keep everyone safe and stress-free — know Biscuit's triggers before you meet.</p>
+          <p class="slide-body-sub">
+            Keep everyone safe and stress-free — know Biscuit's triggers before
+            you meet.
+          </p>
           <div class="chip-row">
             {#each dog.dislikes as dislike}
               <span class="chip chip-dislike">{dislike}</span>
@@ -211,8 +235,8 @@
           </div>
         </div>
       </article>
-
-    </div><!-- /slide-track -->
+    </div>
+    <!-- /slide-track -->
 
     <!-- ── Navigation arrows ───────────────────────────────────────────────── -->
     <button
@@ -221,9 +245,18 @@
       disabled={!canPrev}
       aria-label="Previous card"
     >
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <polyline points="15 18 9 12 15 6"/>
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <polyline points="15 18 9 12 15 6" />
       </svg>
     </button>
 
@@ -233,13 +266,22 @@
       disabled={!canNext}
       aria-label="Next card"
     >
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <polyline points="9 18 15 12 9 6"/>
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <polyline points="9 18 15 12 9 6" />
       </svg>
     </button>
-
-  </div><!-- /carousel-root -->
+  </div>
+  <!-- /carousel-root -->
 
   <!-- ── Footer: label · dots · counter ────────────────────────────────────── -->
   <div class="carousel-footer">
@@ -259,7 +301,6 @@
 
     <span class="slide-counter">{current + 1} / {total}</span>
   </div>
-
 </section>
 
 <!-- ─────────────────────────────────────────────────────────────────────────── -->
@@ -272,7 +313,6 @@
     align-items: center;
     gap: 0.65rem;
   }
-
 
   /* ── Carousel ── */
   .carousel-root {
@@ -313,7 +353,9 @@
   }
 
   /* ── Slide 0: Profile hero ── */
-  .profile-card { padding: 0; }
+  .profile-card {
+    padding: 0;
+  }
 
   .avatar-hero {
     position: relative;
@@ -333,7 +375,11 @@
   .avatar-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(30, 22, 10, 0.72) 0%, transparent 55%);
+    background: linear-gradient(
+      to top,
+      rgba(30, 22, 10, 0.72) 0%,
+      transparent 55%
+    );
     display: flex;
     align-items: flex-end;
     padding: 1.25rem 1.25rem 1.1rem;
@@ -346,7 +392,7 @@
   }
 
   .dog-name {
-    font-family: 'Nunito', sans-serif;
+    font-family: "Nunito", sans-serif;
     font-size: 1.5rem;
     font-weight: 900;
     color: #ffffff;
@@ -356,10 +402,10 @@
   }
 
   .dog-breed {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 0.68rem;
     font-weight: 700;
-    color: #F4A261;
+    color: #f4a261;
     text-transform: uppercase;
     letter-spacing: 0.07em;
     margin: 0;
@@ -373,9 +419,9 @@
   }
 
   .dog-bio {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 0.78rem;
-    color: #8D99AE;
+    color: #8d99ae;
     margin: 0;
     line-height: 1.6;
   }
@@ -388,7 +434,7 @@
   }
 
   .tag {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 0.63rem;
     font-weight: 600;
     color: #3a7d5e;
@@ -401,39 +447,39 @@
 
   /* ── Inner slide headers ── */
   .slide-eyebrow {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 0.65rem;
     font-weight: 700;
-    color: #F4A261;
+    color: #f4a261;
     text-transform: uppercase;
     letter-spacing: 0.09em;
     padding: 1.25rem 1.25rem 0;
   }
 
   .slide-title {
-    font-family: 'Nunito', sans-serif;
+    font-family: "Nunito", sans-serif;
     font-size: 1.2rem;
     font-weight: 900;
-    color: #4A4A4A;
+    color: #4a4a4a;
     margin: 0.2rem 0 0.85rem;
     padding: 0 1.25rem;
     line-height: 1.25;
   }
 
   .slide-body-sub {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 0.76rem;
-    color: #8D99AE;
+    color: #8d99ae;
     padding: 0 1.25rem;
     margin: 0 0 1rem;
     line-height: 1.65;
   }
 
   .section-sub-title {
-    font-family: 'Nunito', sans-serif;
+    font-family: "Nunito", sans-serif;
     font-size: 0.85rem;
     font-weight: 800;
-    color: #4A4A4A;
+    color: #4a4a4a;
     margin: 0 0 0.45rem;
     padding: 0 1.25rem;
   }
@@ -460,7 +506,7 @@
     padding: 0.7rem 0.8rem;
     border-radius: 12px;
     border: 1px solid transparent;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 0.78rem;
     font-weight: 600;
   }
@@ -477,9 +523,16 @@
     color: #b94444;
   }
 
-  .fi-icon   { font-size: 1.05rem; }
-  .fi-label  { flex: 1; }
-  .fi-status { font-size: 0.85rem; font-weight: 700; }
+  .fi-icon {
+    font-size: 1.05rem;
+  }
+  .fi-label {
+    flex: 1;
+  }
+  .fi-status {
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
 
   /* ── Vitals ── */
   .vitals-col {
@@ -493,13 +546,22 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 0.82rem;
   }
 
-  .vital-lbl  { color: #8D99AE; }
-  .vital-dots { font-size: 0.67rem; color: #F4A261; letter-spacing: 0.15em; }
-  .vital-val  { font-weight: 700; color: #4A4A4A; }
+  .vital-lbl {
+    color: #8d99ae;
+  }
+  .vital-dots {
+    font-size: 0.67rem;
+    color: #f4a261;
+    letter-spacing: 0.15em;
+  }
+  .vital-val {
+    font-weight: 700;
+    color: #4a4a4a;
+  }
 
   /* ── Chips ── */
   .chip-row {
@@ -510,16 +572,28 @@
   }
 
   .chip {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 0.72rem;
     font-weight: 600;
     border-radius: 999px;
     padding: 0.32rem 0.8rem;
   }
 
-  .chip-treat   { background: rgba(244,162,97,0.12);  color: #c4722a; border: 1px solid rgba(244,162,97,0.25); }
-  .chip-smell   { background: rgba(141,153,174,0.1);  color: #5a6578; border: 1px solid rgba(141,153,174,0.22); }
-  .chip-dislike { background: rgba(231,90,90,0.08);   color: #b94444; border: 1px solid rgba(231,90,90,0.18); }
+  .chip-treat {
+    background: rgba(244, 162, 97, 0.12);
+    color: #c4722a;
+    border: 1px solid rgba(244, 162, 97, 0.25);
+  }
+  .chip-smell {
+    background: rgba(141, 153, 174, 0.1);
+    color: #5a6578;
+    border: 1px solid rgba(141, 153, 174, 0.22);
+  }
+  .chip-dislike {
+    background: rgba(231, 90, 90, 0.08);
+    color: #b94444;
+    border: 1px solid rgba(231, 90, 90, 0.18);
+  }
 
   /* ── Places ── */
   .places-list {
@@ -533,9 +607,9 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 0.82rem;
-    color: #4A4A4A;
+    color: #4a4a4a;
   }
 
   .place-bubble {
@@ -551,7 +625,9 @@
     flex-shrink: 0;
   }
 
-  .place-name { font-weight: 600; }
+  .place-name {
+    font-weight: 600;
+  }
 
   /* ── Navigation arrows ── */
   .nav-arrow {
@@ -568,13 +644,13 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: #4A4A4A;
+    color: #4a4a4a;
     transition:
-      transform   0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
-      opacity     0.15s ease,
-      box-shadow  0.15s ease,
+      transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 0.15s ease,
+      box-shadow 0.15s ease,
       border-color 0.15s ease,
-      color       0.15s ease;
+      color 0.15s ease;
     z-index: 2;
     padding: 0;
   }
@@ -583,7 +659,7 @@
     transform: translateY(-50%) scale(1.1);
     box-shadow: 0 6px 20px rgba(244, 162, 97, 0.22);
     border-color: rgba(244, 162, 97, 0.4);
-    color: #F4A261;
+    color: #f4a261;
   }
 
   .nav-arrow:active:not(:disabled) {
@@ -596,8 +672,12 @@
     pointer-events: none;
   }
 
-  .nav-prev { left: -16px; }
-  .nav-next { right: -16px; }
+  .nav-prev {
+    left: -16px;
+  }
+  .nav-next {
+    right: -16px;
+  }
 
   /* ── Footer ── */
   .carousel-footer {
@@ -610,10 +690,10 @@
   }
 
   .slide-label-text {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 0.68rem;
     font-weight: 700;
-    color: #F4A261;
+    color: #f4a261;
     text-transform: uppercase;
     letter-spacing: 0.07em;
     min-width: 64px;
@@ -639,7 +719,7 @@
   .dot.active {
     width: 20px;
     border-radius: 3px;
-    background: #F4A261;
+    background: #f4a261;
   }
 
   .dot:hover:not(.active) {
@@ -648,10 +728,10 @@
   }
 
   .slide-counter {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 0.68rem;
     font-weight: 600;
-    color: #8D99AE;
+    color: #8d99ae;
     min-width: 32px;
     text-align: right;
   }

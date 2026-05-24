@@ -1,17 +1,20 @@
 <script>
-  import logo from '$lib/assets/pawprint-logo.png'
+  import { asset, resolve } from "$app/paths";
 </script>
 
 <section class="cta-section" id="create">
   <div class="cta-card">
-    <img src={logo} alt="PawPrint" class="cta-logo" />
+    <img
+      src={asset("/assets/pawprint-logo.png")}
+      alt="PawPrint"
+      class="cta-logo"
+    />
     <h2 class="cta-headline">Ready to Give Your Dog<br />Their Own Page?</h2>
     <p class="cta-sub">
-      Free to create. Shareable anywhere. Built with love for dogs and the humans who adore them.
+      Free to create. Shareable anywhere. Built with love for dogs and the
+      humans who adore them.
     </p>
-    <a href="/view" class="cta-btn">
-      Create Your PawPrint 🐾
-    </a>
+    <a href={resolve("/view")} class="cta-btn"> Create Your PawPrint 🐾 </a>
     <p class="cta-fine">No credit card. No nonsense. Just good dogs.</p>
   </div>
 </section>
@@ -22,7 +25,7 @@
   }
 
   .cta-card {
-    background: #4A4A4A;
+    background: #4a4a4a;
     border-radius: 22px;
     padding: 2.25rem 1.75rem;
     display: flex;
@@ -35,7 +38,7 @@
   }
 
   .cta-card::before {
-    content: '🐾';
+    content: "🐾";
     position: absolute;
     font-size: 8rem;
     opacity: 0.06;
@@ -54,7 +57,7 @@
   }
 
   .cta-headline {
-    font-family: 'Nunito', sans-serif;
+    font-family: "Nunito", sans-serif;
     font-size: 1.55rem;
     font-weight: 900;
     color: #fff;
@@ -63,7 +66,7 @@
   }
 
   .cta-sub {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 0.82rem;
     color: rgba(255, 255, 255, 0.6);
     line-height: 1.7;
@@ -73,16 +76,18 @@
 
   .cta-btn {
     display: inline-block;
-    background: #F4A261;
+    background: #f4a261;
     color: #fff;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 0.9rem;
     font-weight: 700;
     padding: 1rem 2rem;
     border-radius: 14px;
     text-decoration: none;
     box-shadow: 0 6px 20px rgba(244, 162, 97, 0.4);
-    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s ease;
+    transition:
+      transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 0.18s ease;
     margin-top: 0.25rem;
   }
 
@@ -92,7 +97,7 @@
   }
 
   .cta-fine {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 0.7rem;
     color: rgba(255, 255, 255, 0.35);
     margin: 0;

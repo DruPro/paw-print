@@ -1,12 +1,13 @@
 <script>
   let showModal = $state(false);
-  let exampleAvatar = '/assets/golden-retriever-tongue-out.jpg'
+  import { asset } from "$app/paths";
+  // SvelteKit automatically prepends the repo name during the build
+  let exampleAvatar = asset("/assets/golden-retriever-tongue-out.jpg");
   const dog = {
     name: "Biscuit McFloof",
     breed: "Golden Retriever · 3 yrs · Male",
     bio: "Professional Squirrel Chaser 🐿️ | Treat Connoisseur | Certified Zoomie Expert",
-    avatarUrl:
-      exampleAvatar,
+    avatarUrl: exampleAvatar,
 
     treats: [
       "Peanut Butter",
@@ -319,7 +320,7 @@
 
       <div bind:this={iframeWrapper} class="iframe-wrapper">
         <iframe
-          src="/viewmini"
+          src={resolve("/viewmini")}
           title="Mini preview"
           width="300"
           height="200"
@@ -371,7 +372,7 @@
   /* ── Modal Styles ── */
   .modal-overlay {
     position: fixed;
-   
+
     inset: 0;
     background: rgba(30, 34, 43, 0.6);
     backdrop-filter: blur(4px);
