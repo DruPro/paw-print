@@ -3,7 +3,7 @@
 ![Vite](https://img.shields.io/badge/Vite-%23646CFF.svg?style=flat&logo=vite&logoColor=white)
 ![Deno](https://img.shields.io/badge/Deno-white?style=flat&logo=deno&logoColor=black)
 ## Project Overview
-Please Watch This Introduction Video!  (https://www.youtube.com/watch?v=cUsgwQiLM2o)[Introduction Video]
+Please Watch This Introduction Video!  [Introduction Video](https://www.youtube.com/watch?v=cUsgwQiLM2o)
 Paw-Print is a high-fidelity, mobile-first link-in-bio platform engineered specifically for the pet owner demographic. Unlike standard link aggregators, Paw-Print prioritizes contextual safety and personality, providing a structured "User Manual" for pets.
 
 ## Core Implementation
