@@ -1,42 +1,55 @@
-# sv
+# Paw-Print Technical Assessment
+![Svelte](https://img.shields.io/badge/Svelte-FF3E00?style=for-the-badge&logo=svelte&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-%23646CFF.svg?style=flat&logo=vite&logoColor=white)
+![Deno](https://img.shields.io/badge/Deno-white?style=flat&logo=deno&logoColor=black)
+## Project Overview
+Please Watch This Introduction Video!  [Introduction Video](https://www.youtube.com/watch?v=cUsgwQiLM2o)
+Paw-Print is a high-fidelity, mobile-first link-in-bio platform engineered specifically for the pet owner demographic. Unlike standard link aggregators, Paw-Print prioritizes contextual safety and personality, providing a structured "User Manual" for pets.
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+## Core Implementation
 
-## Creating a project
+* **Profile Section:** Dynamic display of pet identity (Avatar, Name, Bio).
+* **Link Management:** A vertical stack of high-performance link buttons with interactive hover states.
+* **Aesthetics:** A minimalist "Global Black" and warm neutral color palette, utilizing professional typography for readability and brand authority.
+* **Responsiveness:** Mobile-first architecture with fluid breakpoints for seamless viewing on mobile, tablet, and desktop.
+* **Code Structure:** Modular, component-driven architecture using Svelte 5 (Runes) for optimized state management and reactive updates.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## System Architecture
 
-```sh
-# create a new project
-npx sv create my-app
-```
+The following diagram illustrates the ingestion, retrieval, and mini-view distribution pipelines designed for scale, utilizing CDN caching, Redis for hot-spot handling, and non-SQL storage for template JSON data.
+<img src="https://github.com/DruPro/paw-print/blob/main/systems_diagram.png" alt="Systems Diagram">
+## The Feature Pitch: Mini-View Embeddable Hubs
 
-To recreate this project with the same configuration:
+### What is the feature?
 
-```sh
-# recreate this project
-deno run npm:sv@0.15.3 create --template minimal --no-types --install deno my-app
-```
+Mini-View is a lightweight, embeddable widget that allows users to place a live, interactive version of their Paw-Print profile directly onto external websites (blogs, portfolios, or business sites) via a simple script injection.
 
-## Developing
+### Why Linktree needs it
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Current link-in-bio platforms suffer from "click-away friction." Users must leave their primary destination to view links. Mini-View solves this by bringing the link hub to the content. It turns a static link into a portable, integrated digital identity, significantly increasing audience retention and providing a professional touchpoint for brands or influencers.
 
-```sh
-npm run dev
+### How it was built
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+* **Component Structure:** The Mini-View is built as a self-contained Web Component. This ensures encapsulation and prevents style leakage from the host website's CSS.
+* **Dynamic Resizing:** To ensure a native experience, the Mini-View uses `window.postMessage` to communicate its internal `scrollHeight` to the parent window, allowing the host container to dynamically resize and preventing layout issues.
+* **State Management:** Utilizes Svelte's reactivity to fetch and update pet metadata in real-time, ensuring that edits made on the Paw-Print platform reflect immediately on all external embeds.
+* **Tradeoffs:** To maintain performance, the initial load is lazy-loaded, ensuring the host site's Core Web Vitals remain unaffected.
 
-## Building
+### Production Scaling
 
-To create a production version of your app:
+At Linktree’s scale, Mini-View would require a robust edge-caching strategy. The data model for millions of users would rely on a CDN-backed JSON structure to ensure near-instant load times globally, as depicted in the system architecture above.
 
-```sh
-npm run build
-```
+## Technical Stack
 
-You can preview the production build with `npm run preview`.
+* **Framework:** Svelte 5
+* **Styling:** CSS Modules / PostCSS
+* **Hosting:** Vercel (Edge Functions)
+* **Database/Cache:** Redis (for hot-spot handling) / Non-SQL Template JSON Storage
+* **Build Tool:** Vite
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+## Setup Instructions
+
+1. Clone the repository.
+2. Run `npm install` to install dependencies.
+3. Run `npm run dev` to start the development server.
+4. Open `localhost:5173` to view the implementation.
