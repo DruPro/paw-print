@@ -37,13 +37,6 @@ Current link-in-bio platforms suffer from "click-away friction." Users must leav
 
 At Linktree’s scale, Mini-View would require a robust edge-caching strategy. The data model for millions of users would rely on a CDN-backed JSON structure to ensure near-instant load times globally, as depicted in the system architecture above.
 
-**Engineering Considerations:**
-
-* **Performance:** All embed assets must be delivered via an optimized CDN, with strict bundle-size limits to ensure they do not slow down the host website.
-* **Abuse Prevention:** We would implement strict Origin-Check headers and allow-lists to prevent unauthorized embedding of profiles. Rate-limiting would be enforced at the API gateway level to prevent DDoS attacks via high-traffic host sites.
-* **Security (Sandboxing):** The embed is delivered with `sandbox="allow-scripts allow-forms"` attributes to isolate the widget from the parent page's DOM, mitigating XSS risks.
-* **Rollout Strategy:** I would approach this via a canary release, starting with a subset of high-engagement power users. Success would be measured through "CTR" (Click-Through Rate) comparison between traditional links and embedded widgets, and latency monitoring on third-party host environments.
-
 ## Technical Stack
 
 * **Framework:** Svelte 5
