@@ -1,6 +1,6 @@
 <script>
   let showModal = $state(false);
-  import { asset,resolve } from "$app/paths";
+  import { asset, resolve } from "$app/paths";
   // SvelteKit automatically prepends the repo name during the build
   let exampleAvatar = asset("/assets/golden-retriever-tongue-out.jpg");
   const dog = {
@@ -130,135 +130,139 @@
       {/each}
     </div>
 
-    <div class="divider" aria-hidden="true"></div>
+    <div class="divider top-divider" aria-hidden="true"></div>
 
-    <!-- Friendly with -->
-    <div class="card-section">
-      <h4 class="card-section-title">Friendly With</h4>
-      <div class="friendly-grid">
-        <div
-          class="friendly-item"
-          class:yes={dog.friendlyWith.dogs}
-          class:no={!dog.friendlyWith.dogs}
-        >
-          <span class="friendly-icon">🐕</span>
-          <span class="friendly-label">Dogs</span>
-          <span class="friendly-status"
-            >{dog.friendlyWith.dogs ? "✓" : "✗"}</span
+    <!-- Wrapping Content for Desktop Grid Compatibility -->
+    <div class="card-content">
+      <!-- Friendly with -->
+      <div class="card-section">
+        <h4 class="card-section-title">Friendly With</h4>
+        <div class="friendly-grid">
+          <div
+            class="friendly-item"
+            class:yes={dog.friendlyWith.dogs}
+            class:no={!dog.friendlyWith.dogs}
           >
-        </div>
-        <div
-          class="friendly-item"
-          class:yes={dog.friendlyWith.cats}
-          class:no={!dog.friendlyWith.cats}
-        >
-          <span class="friendly-icon">🐈</span>
-          <span class="friendly-label">Cats</span>
-          <span class="friendly-status"
-            >{dog.friendlyWith.cats ? "✓" : "✗"}</span
-          >
-        </div>
-        <div
-          class="friendly-item"
-          class:yes={dog.friendlyWith.kids}
-          class:no={!dog.friendlyWith.kids}
-        >
-          <span class="friendly-icon">👧</span>
-          <span class="friendly-label">Kids</span>
-          <span class="friendly-status"
-            >{dog.friendlyWith.kids ? "✓" : "✗"}</span
-          >
-        </div>
-        <div
-          class="friendly-item"
-          class:yes={dog.friendlyWith.strangers}
-          class:no={!dog.friendlyWith.strangers}
-        >
-          <span class="friendly-icon">🧑</span>
-          <span class="friendly-label">Strangers</span>
-          <span class="friendly-status"
-            >{dog.friendlyWith.strangers ? "✓" : "✗"}</span
-          >
-        </div>
-      </div>
-    </div>
-
-    <div class="divider" aria-hidden="true"></div>
-
-    <!-- Vitals -->
-    <div class="card-section">
-      <h4 class="card-section-title">At a Glance</h4>
-      <div class="vitals-grid">
-        <div class="vital-row">
-          <span class="vital-label">⚡ Energy Level</span>
-          <span class="vital-dots">{stars(dog.vitals.energy).join(" ")}</span>
-        </div>
-        <div class="vital-row">
-          <span class="vital-label">🎓 Training</span>
-          <span class="vital-dots"
-            >{stars(dog.vitals.trainedLevel).join(" ")}</span
-          >
-        </div>
-        <div class="vital-row">
-          <span class="vital-label">📢 Bark Level</span>
-          <span class="vital-dots">{stars(dog.vitals.barkLevel).join(" ")}</span
-          >
-        </div>
-        <div class="vital-row">
-          <span class="vital-label">⚖️ Weight</span>
-          <span class="vital-value">{dog.vitals.weight}</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="divider" aria-hidden="true"></div>
-
-    <!-- Fave treats -->
-    <div class="card-section">
-      <h4 class="card-section-title">🦴 Favourite Treats</h4>
-      <div class="chip-row">
-        {#each dog.treats as treat}
-          <span class="chip chip-treat">{treat}</span>
-        {/each}
-      </div>
-    </div>
-
-    <div class="divider" aria-hidden="true"></div>
-
-    <!-- Fave smells -->
-    <div class="card-section">
-      <h4 class="card-section-title">👃 Favourite Smells</h4>
-      <div class="chip-row">
-        {#each dog.smells as smell}
-          <span class="chip chip-smell">{smell}</span>
-        {/each}
-      </div>
-    </div>
-
-    <div class="divider" aria-hidden="true"></div>
-
-    <!-- Favourite places -->
-    <div class="card-section">
-      <h4 class="card-section-title">📍 Favourite Places</h4>
-      <div class="places-list">
-        {#each dog.favoritePlaces as place}
-          <div class="place-row">
-            <span class="place-emoji">{place.emoji}</span>
-            <span class="place-name">{place.name}</span>
+            <span class="friendly-icon">🐕</span>
+            <span class="friendly-label">Dogs</span>
+            <span class="friendly-status"
+              >{dog.friendlyWith.dogs ? "✓" : "✗"}</span
+            >
           </div>
-        {/each}
+          <div
+            class="friendly-item"
+            class:yes={dog.friendlyWith.cats}
+            class:no={!dog.friendlyWith.cats}
+          >
+            <span class="friendly-icon">🐈</span>
+            <span class="friendly-label">Cats</span>
+            <span class="friendly-status"
+              >{dog.friendlyWith.cats ? "✓" : "✗"}</span
+            >
+          </div>
+          <div
+            class="friendly-item"
+            class:yes={dog.friendlyWith.kids}
+            class:no={!dog.friendlyWith.kids}
+          >
+            <span class="friendly-icon">👧</span>
+            <span class="friendly-label">Kids</span>
+            <span class="friendly-status"
+              >{dog.friendlyWith.kids ? "✓" : "✗"}</span
+            >
+          </div>
+          <div
+            class="friendly-item"
+            class:yes={dog.friendlyWith.strangers}
+            class:no={!dog.friendlyWith.strangers}
+          >
+            <span class="friendly-icon">🧑</span>
+            <span class="friendly-label">Strangers</span>
+            <span class="friendly-status"
+              >{dog.friendlyWith.strangers ? "✓" : "✗"}</span
+            >
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="divider" aria-hidden="true"></div>
+      <div class="divider inner-divider" aria-hidden="true"></div>
 
-    <!-- Dislikes -->
-    <div class="card-section">
-      <h4 class="card-section-title">🚫 Does NOT Like</h4>
-      <div class="chip-row">
-        {#each dog.dislikes as dislike}
-          <span class="chip chip-dislike">{dislike}</span>
-        {/each}
+      <!-- Vitals -->
+      <div class="card-section">
+        <h4 class="card-section-title">At a Glance</h4>
+        <div class="vitals-grid">
+          <div class="vital-row">
+            <span class="vital-label">⚡ Energy Level</span>
+            <span class="vital-dots">{stars(dog.vitals.energy).join(" ")}</span>
+          </div>
+          <div class="vital-row">
+            <span class="vital-label">🎓 Training</span>
+            <span class="vital-dots"
+              >{stars(dog.vitals.trainedLevel).join(" ")}</span
+            >
+          </div>
+          <div class="vital-row">
+            <span class="vital-label">📢 Bark Level</span>
+            <span class="vital-dots"
+              >{stars(dog.vitals.barkLevel).join(" ")}</span
+            >
+          </div>
+          <div class="vital-row">
+            <span class="vital-label">⚖️ Weight</span>
+            <span class="vital-value">{dog.vitals.weight}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider inner-divider" aria-hidden="true"></div>
+
+      <!-- Fave treats -->
+      <div class="card-section">
+        <h4 class="card-section-title">🦴 Favourite Treats</h4>
+        <div class="chip-row">
+          {#each dog.treats as treat}
+            <span class="chip chip-treat">{treat}</span>
+          {/each}
+        </div>
+      </div>
+
+      <div class="divider inner-divider" aria-hidden="true"></div>
+
+      <!-- Fave smells -->
+      <div class="card-section">
+        <h4 class="card-section-title">👃 Favourite Smells</h4>
+        <div class="chip-row">
+          {#each dog.smells as smell}
+            <span class="chip chip-smell">{smell}</span>
+          {/each}
+        </div>
+      </div>
+
+      <div class="divider inner-divider" aria-hidden="true"></div>
+
+      <!-- Favourite places -->
+      <div class="card-section">
+        <h4 class="card-section-title">📍 Favourite Places</h4>
+        <div class="places-list">
+          {#each dog.favoritePlaces as place}
+            <div class="place-row">
+              <span class="place-emoji">{place.emoji}</span>
+              <span class="place-name">{place.name}</span>
+            </div>
+          {/each}
+        </div>
+      </div>
+
+      <div class="divider inner-divider" aria-hidden="true"></div>
+
+      <!-- Dislikes -->
+      <div class="card-section">
+        <h4 class="card-section-title">🚫 Does NOT Like</h4>
+        <div class="chip-row">
+          {#each dog.dislikes as dislike}
+            <span class="chip chip-dislike">{dislike}</span>
+          {/each}
+        </div>
       </div>
     </div>
   </div>
@@ -372,7 +376,6 @@
   /* ── Modal Styles ── */
   .modal-overlay {
     position: fixed;
-
     inset: 0;
     background: rgba(30, 34, 43, 0.6);
     backdrop-filter: blur(4px);
@@ -610,6 +613,12 @@
     letter-spacing: 0.02em;
   }
 
+  /* ── Content Wrapper ── */
+  .card-content {
+    display: flex;
+    flex-direction: column;
+  }
+
   /* ── Sections ── */
   .divider {
     height: 1px;
@@ -758,5 +767,124 @@
   }
   .place-name {
     font-weight: 500;
+  }
+
+  /* ── Desktop / Laptop Layout Enhancements ── */
+  @media (min-width: 768px) {
+    .preview-section {
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .fab-btn {
+      top: 2rem;
+      right: 2rem;
+      width: 52px;
+      height: 52px;
+    }
+
+    .section-title {
+      font-size: 2.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .profile-card {
+      border-radius: 24px;
+      box-shadow: 0 12px 48px rgba(74, 74, 74, 0.08);
+    }
+
+    .card-header {
+      padding: 2.5rem 3rem 1.5rem;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .avatar-ring {
+      width: 120px;
+      height: 120px;
+      border-width: 4px;
+    }
+
+    .dog-name {
+      font-size: 2rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .dog-breed {
+      font-size: 0.85rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .dog-bio {
+      font-size: 0.95rem;
+    }
+
+    .tag-row {
+      padding: 0 3rem 2rem;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.35rem 0.85rem;
+    }
+
+    .top-divider {
+      margin: 0 3rem;
+    }
+
+    /* Convert lower details area into a balanced 2-column grid */
+    .card-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 3.5rem;
+      row-gap: 2.5rem;
+      padding: 2.5rem 3rem 3rem;
+    }
+
+    /* Hide the inner horizontal dividers in desktop mode; grid gaps manage spacing */
+    .inner-divider {
+      display: none;
+    }
+
+    /* Remove the mobile padding overrides since the grid container tracks handles outer spacing */
+    .card-section {
+      padding: 0;
+    }
+
+    .card-section-title {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .friendly-item {
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+    }
+
+    .vital-row {
+      font-size: 0.95rem;
+      padding: 0.25rem 0;
+    }
+
+    .chip {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.85rem;
+    }
+
+    .place-row {
+      font-size: 0.95rem;
+      padding: 0.15rem 0;
+    }
+
+    .modal-content {
+      max-width: 650px;
+    }
   }
 </style>
