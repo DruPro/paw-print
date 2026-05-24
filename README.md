@@ -1,7 +1,9 @@
 # Paw-Print Technical Assessment
-
+![Svelte](https://img.shields.io/badge/Svelte-FF3E00?style=for-the-badge&logo=svelte&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-%23646CFF.svg?style=flat&logo=vite&logoColor=white)
+![Deno](https://img.shields.io/badge/Deno-white?style=flat&logo=deno&logoColor=black)
 ## Project Overview
-
+Please Watch This Introduction Video!  (https://www.youtube.com/watch?v=cUsgwQiLM2o)[Introduction Video]
 Paw-Print is a high-fidelity, mobile-first link-in-bio platform engineered specifically for the pet owner demographic. Unlike standard link aggregators, Paw-Print prioritizes contextual safety and personality, providing a structured "User Manual" for pets.
 
 ## Core Implementation
