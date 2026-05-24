@@ -1,6 +1,6 @@
 <script>
   let showModal = $state(false);
-  import { asset } from "$app/paths";
+  import { asset,resolve } from "$app/paths";
   // SvelteKit automatically prepends the repo name during the build
   let exampleAvatar = asset("/assets/golden-retriever-tongue-out.jpg");
   const dog = {
